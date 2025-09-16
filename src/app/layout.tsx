@@ -29,6 +29,14 @@ const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>)
       return groups;
     },
   });
+  await queryClient.prefetchQuery({
+    queryKey: ['students'],
+    queryFn: async () => {
+      groups = await getStudentsApi();
+      console.log('Students', students);
+      return students;
+    },
+  });
 
   const state = dehydrate(queryClient, { shouldDehydrateQuery: () => true });
 
