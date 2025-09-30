@@ -11,6 +11,9 @@ import Main from '@/components/layout/Main/Main';
 import type { Metadata } from 'next';
 
 import '@/styles/globals.scss';
+import { getStudentsApi } from '@/api/studentsApi';
+import Students from '@/components/Students/Students';
+import StudentInterface from '@/types/StudentInterface';
 
 export const metadata: Metadata = {
   title: 'Вэб разработка ВКИ - Next.js шаблон',
@@ -29,10 +32,12 @@ const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>)
       return groups;
     },
   });
+
+  let students: StudentInterface[];
   await queryClient.prefetchQuery({
     queryKey: ['students'],
     queryFn: async () => {
-      groups = await getStudentsApi();
+      students = await getStudentsApi();
       console.log('Students', students);
       return students;
     },

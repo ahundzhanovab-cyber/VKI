@@ -13,7 +13,7 @@ const Students = (): React.ReactElement => {
     <div className={styles.Students}>
       {students.map((student: StudentInterface) => (
         <h2 key={student.id}>
-          {student.id}
+          {student.id} -
           {student.first_name}
           {student.last_name}
           {student.middle_name}
