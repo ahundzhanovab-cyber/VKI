@@ -11,19 +11,19 @@ import Main from '@/components/layout/Main/Main';
 import type { Metadata } from 'next';
 
 import '@/styles/globals.scss';
+import { META_DESCRIPTION, META_TITLE } from '@/constants/meta';
+import type StudentInterface from '@/types/StudentInterface';
 import { getStudentsApi } from '@/api/studentsApi';
-import Students from '@/components/Students/Students';
-import StudentInterface from '@/types/StudentInterface';
 
 export const metadata: Metadata = {
-  title: 'Вэб разработка ВКИ - Next.js шаблон',
-  description: 'Шаблон для веб-разработки с использованием Next.js, React Hook Form, Yup, SCSS, Eslint, TanStack Query (React Query)',
+  title: META_TITLE,
+  description: META_DESCRIPTION,
 };
 
 const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>): Promise<React.ReactElement> => {
-  let groups: GroupInterface[];
 
   // выполняется на сервере - загрузка групп
+  let groups: GroupInterface[];
   await queryClient.prefetchQuery({
     queryKey: ['groups'],
     queryFn: async () => {
@@ -33,6 +33,7 @@ const RootLayout = async ({ children }: Readonly<{ children: React.ReactNode }>)
     },
   });
 
+  // выполняется на сервере - загрузка студентов
   let students: StudentInterface[];
   await queryClient.prefetchQuery({
     queryKey: ['students'],

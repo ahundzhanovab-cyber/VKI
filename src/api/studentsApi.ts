@@ -7,11 +7,11 @@ export const getStudentsApi = async (): Promise<StudentInterface[]> => {
     if (!response.ok) {
       throw new Error(`Ошибка HTTP: ${response.status}${response.statusText}`);
     }
-    const groups = await response.json() as StudentInterface[];
-    return groups;
+    const students = await response.json() as StudentInterface[];
+    return students;
   }
   catch (err) {
-    console.log('>>> getStudentsApi', err);
+    console.log('>>> getGroupsApi', err);
     return [] as StudentInterface[];
   }
 };
