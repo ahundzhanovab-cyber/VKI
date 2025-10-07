@@ -5,9 +5,14 @@ import type GroupInterface from '@/types/StudentInterface';
 import styles from './Students.module.scss';
 import useStudents from '@/hooks/useStudents';
 import StudentInterface from '@/types/StudentInterface';
+interface Props {
+  student: StudentInterface;
+  onDelete: (id: number) => void;
+}
 
 const Students = (): React.ReactElement => {
   const { students } = useStudents();
+  
 
   return (
     <div className={styles.Students}>
